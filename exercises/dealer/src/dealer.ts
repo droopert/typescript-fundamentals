@@ -2,7 +2,8 @@
  * Shuffle an array in place
  * @param a Array to shuffle
  */
-function shuffleArray(a: any[]) {
+let shuffleArray: (a: any[]) => void
+shuffleArray = function(a) {
   // Iterate over the array
   for (let i = a.length; i; i--) {
     // Get next index
@@ -61,7 +62,7 @@ export class Dealer {
 
   deck: Deck
 
-  addCard(card: Card) {
+  addCard(card: Card): Deck {
     this.deck.push(card)
     return this.deck
   }
@@ -70,7 +71,7 @@ export class Dealer {
     shuffleArray(this.deck)
   }
 
-  dealHand(n: number) {
+  dealHand(n: number): Deck {
     if (n < 0) throw Error('Can\'t deal negative number of cards')
     if (n > this.deck.length) throw Error(`Sorry, there are only ${this.deck.length} cards in the deck, and you asked for ${n}.`) 
 
@@ -81,7 +82,8 @@ export class Dealer {
     return this.deck.length
   }
 
-  readCard(card: Card) {
-    return `${CardNumber[card[1]]} of ${Suit[card[0]]}`
+  readCard(card: Card): string {
+    const [suit, cardNumber] = card
+    return `${CardNumber[cardNumber]} of ${Suit[suit]}`
   }
 }
